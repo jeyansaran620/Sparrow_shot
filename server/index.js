@@ -2,8 +2,9 @@ var webshot = require('node-webshot');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+const uuid = require('uuid');
 
-const captureWebsite = require('capture-website');
+// const captureWebsite = require('capture-website');
 
 var path = require('path');
 
@@ -33,17 +34,20 @@ var mime = {
 
 app.get('/download/:file',(req,res,next) => {
 
-  var filePath = `${__dirname}/public/${req.params.file}`; // Or format the path using the `id` rest param
-  var type = req.params.file.split(".")[1]
+  var filePath = `${__dirname}/public/${req.params.file}`;
+  var type = req.params.file.split(".").slice(-1)[0] 
   var fileName = `screenshot.${type}`; // The default name the browser will use
 
   res.download(filePath, fileName);  
 
 })
 app.post('/shot/', (req,res,next) => {
+
   console.log(req.body);
 
-  webshot(`${req.body.url}`,`${__dirname}/public/result.${req.body.format}`, options = {
+  var fileName  = uuid.v4() + "." +req.body.format; 
+
+  webshot(`${req.body.url}`,`${__dirname}/public/${fileName}`, options = {
     quality: req.body.quality,
     shotSize: {
       width: 1024,
@@ -54,9 +58,9 @@ app.post('/shot/', (req,res,next) => {
         console.log(err)
       }
       // screenshot now saved to google.png
-      console.log(`result.${req.body.format}`+" build done");
+      console.log(`${fileName}`+" build done");
       image = {
-        url: `${hostname}:${port}/result.${req.body.format}`
+        url: `${hostname}:${port}/${fileName}`
       }
       res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
