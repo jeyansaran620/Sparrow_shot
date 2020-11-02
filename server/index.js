@@ -10,8 +10,8 @@ var path = require('path');
 
 const express = require('express')
 
-const hostname = 'localhost';
-const port = 3000;
+const hostname = 'https://sparrow-shot.herokuapp.com';
+const port = process.env.PORT || 3000;
 
 const app = express();
 
@@ -41,6 +41,7 @@ app.get('/download/:file',(req,res,next) => {
   res.download(filePath, fileName);  
 
 })
+
 app.post('/shot/', (req,res,next) => {
 
   console.log(req.body);
@@ -60,7 +61,7 @@ app.post('/shot/', (req,res,next) => {
       // screenshot now saved to google.png
       console.log(`${fileName}`+" build done");
       image = {
-        url: `${hostname}:${port}/${fileName}`
+        url: `${hostname}/${fileName}`
       }
       res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -99,6 +100,6 @@ app.get('*', function (req, res) {
 
 const server = http.createServer(app);
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(port, () => {
+  console.log(`Server running at port ${port}/`);
 });
