@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #1A1A1D;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +11,128 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+.navbar-dark {
+  border: 5px solid #C3073F;
+  border-radius: 5px;
+  margin: 2px;
+}
+.navbarbrand {
+  font-size: 2rem;
+  color : rgb(228, 27, 27);
+  font-weight: bold;
+}
+
+.jumbotron {
+  padding:70px 30px 70px 30px;
+  margin:0px auto;
+  background: #950740;
+  color: floralwhite;
+}
+
+
+.loader
+{
+    animation: fillLoad 4s infinite alternate;
+} 
+
+.brandName 
+{
+  animation: fillName 4s infinite alternate;
+}
+
+
+.brandName > path:nth-child(1)
+{
+    stroke: red;
+    stroke-dasharray: 3000px;
+    stroke-dashoffset: 3000px;
+    animation: anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(1)
+{
+    stroke-dasharray: 180px;
+    stroke-dashoffset: 180px;
+    animation: anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(2)
+{
+    stroke-dasharray: 140px;
+    stroke-dashoffset: 140px;
+    animation:  anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(3)
+{
+    stroke-dasharray: 175px;
+    stroke-dashoffset: 175px;
+    animation: anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(4)
+{
+    stroke-dasharray: 200px;
+    stroke-dashoffset: 200px;
+    animation:  anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(5)
+{
+    stroke-dasharray: 110px;
+    stroke-dashoffset: 110px;
+    animation:  anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(6)
+{
+    stroke-dasharray: 245px;
+    stroke-dashoffset: 245px;
+    animation: anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(7)
+{
+    stroke-dasharray: 250px;
+    stroke-dashoffset: 250px;
+    animation:  anime 4s infinite alternate;
+}
+
+@keyframes anime
+{
+    to
+    {
+        stroke-dashoffset: 0px;
+        stroke-dasharray: 0px;
+    }
+}
+
+@keyframes fillLoad
+{
+    from
+    {
+        fill: transparent;
+    }
+    to
+    {
+        fill: white;
+    }
+}
+
+@keyframes fillName
+{
+    from
+    {
+        fill: transparent;
+    }
+    to
+    {
+        fill: rgb(224, 50, 50);
+    }
 }
