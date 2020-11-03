@@ -20,11 +20,6 @@ class Forms extends React.Component{
     DownloadUrl = "https://sparrow-shot.herokuapp.com/download/"
 
 
-    downloadImage = () => {
-        const headers = {
-            method: 'GET' };
-      fetch(this.DownloadUrl+this.state.imageName, headers )
-    }
     submitForm = (e) => 
     {
         e.preventDefault();
@@ -164,23 +159,21 @@ class Forms extends React.Component{
     </FormGroup>
   </Form>
   {!this.state.loading ? null : 
-    <Loading />
+    <Loading className="row"/>
   }
   {!this.state.fetchError ? null : 
-    <div>There is a Inconvenience... Try Again</div>
+    <div className= "messages">There is a Inconvenience... Try Again</div>
   }
   {this.state.imageName === '' ? null : 
   <div> 
        <Card className ="container">
-        <CardImg top width="100%" src={this.ImageUrl+this.state.imageName} alt="..." />
+        <CardImg top width="100%" src={this.ImageUrl+this.state.imageName} alt={"."} />
         <CardBody>
           <CardTitle>ScreenShot Ready !!!</CardTitle>
           <CardText>If this not the Shot you requested for, Kindly regret the Inconvenience... </CardText>
-          <Button onClick = {() => this.downloadImage()}>Download</Button>
+          <Button href={this.DownloadUrl+this.state.imageName}>Download</Button>
         </CardBody>
       </Card>
-      <img > 
-      </img>
   </div>
   }
   </div>

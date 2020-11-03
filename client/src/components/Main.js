@@ -2,7 +2,7 @@ import React from 'react';
 import {Navbar, Nav} from 'reactstrap';
 import Jumbo from './jumbotron';
 import Forms from './Form';
-
+import Footer from './Footer';
 
 function Main() {
   return (
@@ -20,6 +20,7 @@ function Main() {
     </Navbar>
     <Jumbo />
     <Forms />
+    <Footer />
     </div>
   );
 }

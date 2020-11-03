@@ -18,7 +18,7 @@ a {
   text-decoration: inherit; /* no underline */
 }
 .navbar-dark {
-  border: 5px solid #C3073F;
+  border: 3px solid #C3073F;
   border-radius: 5px;
   margin: 2px;
 }
@@ -515,10 +515,41 @@ a {
 
 .form
 {
-  background-color: #4E4E50;
-  margin: 5px;
+  background-color: #1F2833;
+  margin: 10px;
   border-radius: 5px;
+  text-align: center;
+  color: floralwhite;
   box-shadow: 0 0 0 rgb(0,0,0), 0 0 5px rgb(245, 245, 245),0 0 0 rgb(0,0,0), 0 0 5px rgb(245, 245, 245);
 }
 
+.messages , .card ,
+{
+    color: floralwhite;
+    text-align: center;
+    font-size: 1.5rem;
+}
 
+.card {
+    background: linear-gradient(20deg, #950740 ,  #c93232);
+    padding: 5px;
+    margin: 5px;
+}
+.card img{
+    padding: 10px;
+}
+.card button{
+    background-color: #4E4E50;
+}
+
+
+/* footer */
+
+.footer{
+    background-color:  #4E4E50;
+    margin: 0px auto;
+    padding: 5px 0px 5px 0px;
+    color: floralwhite;
+    font-size: 1.2rem;
+  }
+  
