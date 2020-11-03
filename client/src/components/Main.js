@@ -1,7 +1,8 @@
 import React from 'react';
 import {Navbar, Nav} from 'reactstrap';
 import Jumbo from './jumbotron';
-import Loading from './loading';
+import Forms from './Form';
+
 
 function Main() {
   return (
@@ -18,6 +19,7 @@ function Main() {
         </Nav>
     </Navbar>
     <Jumbo />
+    <Forms />
     </div>
   );
 }

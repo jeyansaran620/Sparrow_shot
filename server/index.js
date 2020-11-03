@@ -1,12 +1,12 @@
-var webshot = require('node-webshot');
+const webshot = require('node-webshot');
 const http = require('http');
 const bodyParser = require('body-parser');
-
+const cors = require('cors');
 const uuid = require('uuid');
 
 // const captureWebsite = require('capture-website');
 
-var path = require('path');
+const path = require('path');
 
 const express = require('express')
 
@@ -15,13 +15,15 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(cors());
+
 app.use(bodyParser.json())
 
-var fs = require('fs');
+const fs = require('fs');
 
-var dir = path.join(__dirname, 'public');
+const dir = path.join(__dirname, 'public');
 
-var mime = {
+const mime = {
     html: 'text/html',
     txt: 'text/plain',
     css: 'text/css',
@@ -34,9 +36,9 @@ var mime = {
 
 app.get('/download/:file',(req,res,next) => {
 
-  var filePath = `${__dirname}/public/${req.params.file}`;
-  var type = req.params.file.split(".").slice(-1)[0] 
-  var fileName = `screenshot.${type}`; // The default name the browser will use
+  const filePath = `${__dirname}/public/${req.params.file}`;
+  const type = req.params.file.split(".").slice(-1)[0] 
+  const fileName = `screenshot.${type}`; // The default name the browser will use
 
   res.download(filePath, fileName);  
 
@@ -46,7 +48,7 @@ app.post('/shot/', (req,res,next) => {
 
   console.log(req.body);
 
-  var fileName  = uuid.v4() + "." +req.body.format; 
+  const fileName  = uuid.v4() + "." +req.body.format; 
 
   webshot(`${req.body.url}`,`${__dirname}/public/${fileName}`, options = {
     quality: req.body.quality,
@@ -61,7 +63,7 @@ app.post('/shot/', (req,res,next) => {
       // screenshot now saved to google.png
       console.log(`${fileName}`+" build done");
       image = {
-        url: `${hostname}/${fileName}`
+        url: fileName
       }
       res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -81,12 +83,12 @@ app.post('/shot/', (req,res,next) => {
 });
 
 app.get('*', function (req, res) {
-    var file = path.join(dir, req.path.replace(/\/$/, '/index.html'));
+    const file = path.join(dir, req.path.replace(/\/$/, '/index.html'));
     if (file.indexOf(dir + path.sep) !== 0) {
         return res.status(403).end('Forbidden');
     }
-    var type = mime[path.extname(file).slice(1)] || 'text/plain';
-    var s = fs.createReadStream(file);
+    const type = mime[path.extname(file).slice(1)] || 'text/plain';
+    const s = fs.createReadStream(file);
     s.on('open', function () {
         res.set('Content-Type', type);
         s.pipe(res);
