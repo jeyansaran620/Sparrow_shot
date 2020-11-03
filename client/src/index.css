@@ -31,10 +31,85 @@ a {
 .jumbotron {
   padding:70px 30px 70px 30px;
   margin:0px auto;
-  background: #950740;
-  color: floralwhite;
+  background: linear-gradient(20deg, #950740 ,  #c93232);
+  position: relative;
 }
 
+.jumboBox
+{
+    border: 0px solid white;
+    position: absolute;
+    animation : Shot 12s infinite; 
+}
+.jumboNames{
+    color: floralwhite;
+    font-size: 2rem;
+    font-style: oblique;
+    font-weight: bolder;
+    overflow: hidden;
+}
+
+
+.jumboNames > .jumbos:nth-child(1)
+{
+    transform: translateX(-100%);
+    animation: slide1 12s infinite;
+}
+
+.jumboNames > .jumbos:nth-child(2)
+{
+    transform: translateX(-100%);
+    animation: slide2 12s infinite;
+}
+
+.jumboNames > .jumbos:nth-child(3)
+{
+    transform: translateX(-100%);
+    animation: slide3 12s infinite;
+}
+
+.jumboBalls 
+{
+ width: 100%;
+ height: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: space-around;
+ position: absolute;
+ bottom: 0%;
+ left:0%;
+}
+.jumboBalls  img
+{
+ width: 1.8rem;
+}
+
+.jumboBalls  > img:nth-child(1)
+{
+    width: 0.8rem;
+    animation: Bubble1 12s infinite;
+}
+
+.jumboBalls  > img:nth-child(2)
+{
+    width: 1.8rem;
+    animation: Bubble2 12s infinite;
+}
+.jumboBalls  > img:nth-child(3)
+{
+    width: 0.7rem;
+    animation: Bubble3 12s infinite;
+}
+.jumboBalls  > img:nth-child(4)
+{
+    width: 2.5rem;
+    animation: Bubble4 12s infinite;
+}
+.jumboBalls  > img:nth-child(5)
+{
+    width: 0.8rem;
+    animation: Bubble5 12s infinite;
+}
 
 .loader
 {
@@ -43,6 +118,8 @@ a {
 
 .brandName 
 {
+  width : 3rem;
+  height: 3rem;
   animation: fillName 4s infinite alternate;
 }
 
@@ -109,7 +186,6 @@ a {
     to
     {
         stroke-dashoffset: 0px;
-        stroke-dasharray: 0px;
     }
 }
 
@@ -134,5 +210,301 @@ a {
     to
     {
         fill: rgb(224, 50, 50);
+    }
+}
+
+
+
+@keyframes Shot
+{
+    0%
+    {
+        width: 100%;
+        height: 100%;
+        top:0;
+        left:0;
+        border: 0px solid #950740;
+    }
+
+    60%
+    {
+        width: 100%;
+        height: 100%;
+        top:0;
+        left:0;
+        border: 0px solid #950740;
+    }
+
+    70%
+    {
+        width: 90%;
+        height: 90%;
+        top: 5%;
+        left: 5%;
+        border: 5px solid floralwhite;
+    }
+    73%
+    {
+        width: 80%;
+        height: 80%;
+        top: 10%;
+        left: 10%;
+    }
+    76%
+    {
+        width: 90%;
+        height: 90%;
+        top: 5%;
+        left: 5%;
+    }
+    95%
+    {
+        width: 90%;
+        height: 90%;
+        top: 5%;
+        left: 5%;
+        border: 5px solid floralwhite;
+    }
+    100%
+    {
+        width: 100%;
+        height: 100%;
+        top:0;
+        left:0;
+        border: 0px solid #950740;
+    }
+}
+
+@keyframes slide1
+{
+    0%
+    {
+        transform: translateX(-140%);
+    }
+    10%
+    {
+        transform: translateX(0%);
+    }
+    30%
+    {
+        transform: translateX(0%);
+    }
+    40%
+    {
+        transform: translateX(-140%);
+    }
+    
+    100%
+    {
+        transform: translateX(-140%);
+    }
+}
+@keyframes slide2
+{
+    0%
+    {
+        transform: translateX(-140%);
+    }
+    30%
+    {
+        transform: translateX(-140%);
+    }
+    40%
+    {
+        transform: translateX(0%);
+    }
+    60%
+    {
+        transform: translateX(0%);
+    }
+    70%
+    {
+        transform: translateX(-140%);
+    }
+    100%
+    {
+        transform: translateX(-140%);
+    }
+}
+@keyframes slide3
+{
+    0%
+    {
+        transform: translateX(-140%);
+    }
+    60%
+    {
+        transform: translateX(-140%);
+    }
+    70%
+    {
+        transform: translateX(0%);
+    }
+    90%
+    {
+        transform: translateX(0%);
+    }
+    100%
+    {
+        transform: translateX(-140%);
+    }
+}
+
+
+@keyframes Bubble1
+{
+    0%
+    {
+        opacity: 0;
+        transform: translateY(200%);
+    }
+    10%
+    {
+        opacity: 0;
+        transform: translateY(200%);
+    }
+    20%
+    {
+        opacity: 1;
+    }
+    73%
+    {
+        transform: translateY(-180%);
+    }
+    95%
+    {
+        opacity: 1;
+        
+    }
+    100%
+    {
+        opacity: 0;
+        transform: translateY(-180%);
+    }
+}
+
+@keyframes Bubble2
+{
+    0%
+    {
+        opacity: 0;
+        transform: translate(200%,100%);
+    }
+    10%
+    {
+        opacity: 0;
+        transform: translate(200%,100%);
+    }
+    20%
+    {
+        opacity: 1;
+    }
+    73%
+    {
+        transform: translate(-100%,-150%);
+    }
+    95%
+    {
+        opacity: 1;
+        
+    }
+    100%
+    {
+        opacity: 0;
+        transform: translate(-100%,-150%);
+    }
+}
+
+
+@keyframes Bubble3
+{
+    0%
+    {
+        opacity: 0;
+        transform: translate(-100%,150%);
+    }
+    10%
+    {
+        opacity: 1;
+    }
+    73%
+    {
+        transform: translate(200%,-200%);
+    }
+    95%
+    {
+        opacity: 1;
+        
+    }
+    100%
+    {
+        opacity: 0;
+        transform: translate(200%,-200%);
+    }
+}
+
+
+@keyframes Bubble4
+{
+    0%
+    {
+        opacity: 0;
+        transform: translate(200%,-100%);
+    }
+    10%
+    {
+        opacity: 0;
+        transform: translate(200%,-100%);
+    }
+    20%
+    {
+        opacity: 1;
+    }
+    73%
+    {
+        transform: translate(-150%,150%);
+    }
+    95%
+    {
+        opacity: 1;
+        
+    }
+    100%
+    {
+        opacity: 0;
+        transform: translate(-150%,150%);
+    }
+}
+
+
+@keyframes Bubble5
+{
+    0%
+    {
+        opacity: 0;
+        transform: translate(200%,150%);
+    }
+    10%
+    {
+        opacity: 0;
+        transform: translate(200%,150%);
+    }
+    20%
+    {
+        opacity: 1;
+    }
+    73%
+    {
+        transform: translate(-150%,-150%);
+    }
+    95%
+    {
+        opacity: 1;
+        
+    }
+    100%
+    {
+        opacity: 0;
+        transform: translate(-150%,-150%);
     }
 }
