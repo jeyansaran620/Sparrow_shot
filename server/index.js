@@ -6,11 +6,8 @@ const uuid = require('uuid');
 
 // const captureWebsite = require('capture-website');
 
-const path = require('path');
-
 const express = require('express')
 
-const hostname = 'https://sparrow-shot.herokuapp.com';
 const port = process.env.PORT || 3000;
 
 const app = express();
@@ -19,57 +16,66 @@ app.use(cors());
 
 app.use(bodyParser.json())
 
-const fs = require('fs');
+app.use(express.static('./public'));
 
-const dir = path.join(__dirname, 'public');
+const validateUrl = (str) =>
+{
+    if (str.split(" ").length > 1)
+    {
+    return false
+    }
+    
+    const pattern =/^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
 
-const mime = {
-    html: 'text/html',
-    txt: 'text/plain',
-    css: 'text/css',
-    gif: 'image/gif',
-    jpg: 'image/jpeg',
-    png: 'image/png',
-    svg: 'image/svg+xml',
-    js: 'application/javascript'
-};
+  return Boolean(pattern.test(str));
+}
 
-app.get('/download/:file',(req,res,next) => {
+app.get('/download/:file',(req,res) => {
 
   const filePath = `${__dirname}/public/${req.params.file}`;
-  const type = req.params.file.split(".").slice(-1)[0] 
+  const type = req.params.file.split(".").slice(-1)[0]
   const fileName = `screenshot.${type}`; // The default name the browser will use
-
   res.download(filePath, fileName);  
 
 })
 
-app.post('/shot/', (req,res,next) => {
 
-  console.log(req.body);
+app.post('/shot/', (req,res) => {
+
+ if (!validateUrl(req.body.url))
+ {
+  res.statusCode = 400;
+  res.send("verify the URL provided");
+
+ return;
+ }
 
   const fileName  = uuid.v4() + "." +req.body.format; 
-
-  webshot(`${req.body.url}`,`${__dirname}/public/${fileName}`, options = {
+  const options = {
     quality: req.body.quality,
     shotSize: {
       width: 1024,
        height: 'all'
-    }}, function(err) {
+    }}
+
+ webshot(`${req.body.url}`,`${__dirname}/public/${fileName}`, options, function(err) {
       if(err)
       {
-        console.log(err)
+        res.statusCode = 500;
+        res.send("Server Error, verify the URL provided");
+        
+        return;
       }
       // screenshot now saved to google.png
-      console.log(`${fileName}`+" build done");
-      image = {
+
+      const image = {
         url: fileName
       }
       res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(image);
     })
-  
+ 
  /*(async () => {
 	await captureWebsite.file(`${req.body.url}`, `${__dirname}/public/ready.${req.body.format}`, {
     width: 1280,
@@ -82,23 +88,10 @@ app.post('/shot/', (req,res,next) => {
 */
 });
 
-app.get('*', function (req, res) {
-    const file = path.join(dir, req.path.replace(/\/$/, '/index.html'));
-    if (file.indexOf(dir + path.sep) !== 0) {
-        return res.status(403).end('Forbidden');
-    }
-    const type = mime[path.extname(file).slice(1)] || 'text/plain';
-    const s = fs.createReadStream(file);
-    s.on('open', function () {
-        res.set('Content-Type', type);
-        s.pipe(res);
-    });
-    s.on('error', function () {
-        res.set('Content-Type', 'text/plain');
-        res.status(404).end('Not found');
-    });
+app.get('*' ,(req,res) => {
+  res.statusCode = 400;
+  res.end("Bad Request path");
 });
-
 
 const server = http.createServer(app);
 

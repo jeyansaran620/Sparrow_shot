@@ -19,6 +19,9 @@ const Jumbo = () => {
             Shot
         </div>
     </div>
+    <div className="jumboNames col-8">
+           Make Screenshot of an URL
+    </div>
     <div className="jumboBalls">
         <img src="./bubles.png"  alt="."></img>
         <img src="./bubles.png"  alt="."></img>

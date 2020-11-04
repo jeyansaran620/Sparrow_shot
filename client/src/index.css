@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  color: floralwhite;
+    font-style: oblique;
   background-color: #1A1A1D;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -17,8 +19,13 @@ a {
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
 }
+
+
+/* Nav bar */
+
 .navbar-dark {
   border: 3px solid #C3073F;
+  background-color: #1A1A1D;
   border-radius: 5px;
   margin: 2px;
 }
@@ -27,6 +34,46 @@ a {
   color : rgb(228, 27, 27);
   font-weight: bold;
 }
+
+.brandName 
+{
+  width : 3rem;
+  height: 3rem;
+  animation: fillName 4s infinite alternate;
+}
+
+
+.brandName > path:nth-child(1)
+{
+    stroke: red;
+    stroke-dasharray: 3000px;
+    stroke-dashoffset: 3000px;
+    animation: anime 4s infinite alternate;
+}
+
+@keyframes fillName
+{
+    from
+    {
+        fill: transparent;
+    }
+    to
+    {
+        fill: rgb(224, 50, 50);
+    }
+}
+
+@keyframes anime
+{
+    to
+    {
+        stroke-dashoffset: 0px;
+    }
+}
+
+
+
+/* jumbotron */
 
 .jumbotron {
   padding:70px 30px 70px 30px;
@@ -42,9 +89,7 @@ a {
     animation : Shot 12s infinite; 
 }
 .jumboNames{
-    color: floralwhite;
-    font-size: 2rem;
-    font-style: oblique;
+    font-size: 1.6rem;
     font-weight: bolder;
     overflow: hidden;
 }
@@ -70,6 +115,7 @@ a {
 
 .jumboBalls 
 {
+z-index: 10;
  width: 100%;
  height: 100%;
  display: flex;
@@ -110,109 +156,6 @@ a {
     width: 0.8rem;
     animation: Bubble5 12s infinite;
 }
-
-.loader
-{
-    animation: fillLoad 4s infinite alternate;
-} 
-
-.brandName 
-{
-  width : 3rem;
-  height: 3rem;
-  animation: fillName 4s infinite alternate;
-}
-
-
-.brandName > path:nth-child(1)
-{
-    stroke: red;
-    stroke-dasharray: 3000px;
-    stroke-dashoffset: 3000px;
-    animation: anime 4s infinite alternate;
-}
-
-.loader > path:nth-child(1)
-{
-    stroke-dasharray: 180px;
-    stroke-dashoffset: 180px;
-    animation: anime 4s infinite alternate;
-}
-
-.loader > path:nth-child(2)
-{
-    stroke-dasharray: 140px;
-    stroke-dashoffset: 140px;
-    animation:  anime 4s infinite alternate;
-}
-
-.loader > path:nth-child(3)
-{
-    stroke-dasharray: 175px;
-    stroke-dashoffset: 175px;
-    animation: anime 4s infinite alternate;
-}
-
-.loader > path:nth-child(4)
-{
-    stroke-dasharray: 200px;
-    stroke-dashoffset: 200px;
-    animation:  anime 4s infinite alternate;
-}
-
-.loader > path:nth-child(5)
-{
-    stroke-dasharray: 110px;
-    stroke-dashoffset: 110px;
-    animation:  anime 4s infinite alternate;
-}
-
-.loader > path:nth-child(6)
-{
-    stroke-dasharray: 245px;
-    stroke-dashoffset: 245px;
-    animation: anime 4s infinite alternate;
-}
-
-.loader > path:nth-child(7)
-{
-    stroke-dasharray: 250px;
-    stroke-dashoffset: 250px;
-    animation:  anime 4s infinite alternate;
-}
-
-@keyframes anime
-{
-    to
-    {
-        stroke-dashoffset: 0px;
-    }
-}
-
-@keyframes fillLoad
-{
-    from
-    {
-        fill: transparent;
-    }
-    to
-    {
-        fill: white;
-    }
-}
-
-@keyframes fillName
-{
-    from
-    {
-        fill: transparent;
-    }
-    to
-    {
-        fill: rgb(224, 50, 50);
-    }
-}
-
 
 
 @keyframes Shot
@@ -509,6 +452,78 @@ a {
     }
 }
 
+/*  Loading */
+
+.loader
+{
+    width:100%;
+    height:auto;
+    animation: fillLoad 4s infinite alternate;
+} 
+
+
+.loader > path:nth-child(1)
+{
+    stroke-dasharray: 180px;
+    stroke-dashoffset: 180px;
+    animation: anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(2)
+{
+    stroke-dasharray: 140px;
+    stroke-dashoffset: 140px;
+    animation:  anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(3)
+{
+    stroke-dasharray: 175px;
+    stroke-dashoffset: 175px;
+    animation: anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(4)
+{
+    stroke-dasharray: 200px;
+    stroke-dashoffset: 200px;
+    animation:  anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(5)
+{
+    stroke-dasharray: 110px;
+    stroke-dashoffset: 110px;
+    animation:  anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(6)
+{
+    stroke-dasharray: 245px;
+    stroke-dashoffset: 245px;
+    animation: anime 4s infinite alternate;
+}
+
+.loader > path:nth-child(7)
+{
+    stroke-dasharray: 250px;
+    stroke-dashoffset: 250px;
+    animation:  anime 4s infinite alternate;
+}
+
+@keyframes fillLoad
+{
+    from
+    {
+        fill: transparent;
+    }
+    to
+    {
+        fill: white;
+    }
+}
+
+
 
 /* form */
 
@@ -519,13 +534,11 @@ a {
   margin: 10px;
   border-radius: 5px;
   text-align: center;
-  color: floralwhite;
   box-shadow: 0 0 0 rgb(0,0,0), 0 0 5px rgb(245, 245, 245),0 0 0 rgb(0,0,0), 0 0 5px rgb(245, 245, 245);
 }
 
-.messages , .card ,
+.messages , .card 
 {
-    color: floralwhite;
     text-align: center;
     font-size: 1.5rem;
 }
@@ -542,14 +555,20 @@ a {
     background-color: #4E4E50;
 }
 
-
 /* footer */
 
 .footer{
-    background-color:  #4E4E50;
+    background-color: #1F2833;
     margin: 0px auto;
     padding: 5px 0px 5px 0px;
-    color: floralwhite;
     font-size: 1.2rem;
   }
   
+  .btn
+  {
+      color:floralwhite;
+  }
+  .btn:hover , .btn .fa :hover
+  {
+      color: indianred;
+  }

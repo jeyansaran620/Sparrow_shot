@@ -52,6 +52,13 @@ class Forms extends React.Component{
           fetch(this.PostUrl, headers )
           .then(res => res.json())
           .then(data => {
+            if(!data.url)
+            {
+              this.setState({
+                loading : false,
+                fetchError: true });
+                return
+            }
             this.setState({
                 loading : false,
                 imageName : data.url
@@ -85,12 +92,9 @@ class Forms extends React.Component{
     {
         if (str.split(" ").length > 1)
         return false
-        var pattern = new RegExp('((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-      return !!pattern.test(str);
+        const pattern =/^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+
+        return Boolean(pattern.test(str));
     } 
 
     handleFormatChange = (event) =>
@@ -115,21 +119,21 @@ class Forms extends React.Component{
     {
  return (
     <div className="container">
-    <Form className="form">
+    <Form className="form" onSubmit={(e) => this.submitForm(e)}>
     <FormGroup row className="p-2">
-      <Label className="col-4 text-center" for="URL" ><h5>URL</h5></Label>
+      <Label className="col-4 text-center" for="URL" ><h5>URL:</h5></Label>
       <div className="col-8 col-md-6 justify-content-center">
-        <Input type="email" style={{height:"2rem"}} id="URL" placeholder="Provide a URL"
+        <Input type="string" style={{height:"2rem"}} id="URL" placeholder="Provide a URL"
          value={this.state.url} 
          onChange={(e) => this.handleUrlChange(e)} />
         <FormText>
-            {this.state.urlDOne ? '' : 'Provide a Valid URL...!'}
+            {this.state.urlDOne ? '' : <h5 style={{color:"floralWhite"}}>Provide a Valid URL...!</h5>}
         </FormText>
       </div>
     </FormGroup>
 
     <FormGroup row tag="fieldset" className="p-2" >
-    <Label className="col-4 text-center"><h5>Format</h5></Label>
+    <Label className="col-4 text-center"><h5>Format:</h5></Label>
     <FormGroup check className="col">
     <Label check for ="png" style={{color:"floralWhite"}}>
               <Input type="radio" id="png" value="png" checked={this.state.format === 'png'} 
@@ -145,21 +149,25 @@ class Forms extends React.Component{
     </FormGroup>
 
         <FormGroup row>
-          <Label className="col-4 text-center" for="exampleSelect"><h5>Quality</h5></Label>
+          <Label className="col-4 text-center" for="exampleSelect"><h5>Quality:</h5></Label>
           <div className="col-7">
           <Input id="typeinp" type="range" min="10" max="100" value={this.state.quality} 
              onChange={(e) => this.handleQualityChange(e)} step="10"/>
+              {this.state.quality} 
           </div>
         </FormGroup>
 
     <FormGroup check className="row p-2">
-      <div className="col-4 offset-8">
-        <Button style={{backgroundColor:"rgb(50,50,50)",color:"floralWhite"}} onClick={(e) => this.submitForm(e)}>Capture</Button>
+      <div className="col-4 offset-7">
+        <Button style={{backgroundColor:"rgb(50,50,50)",color:"floralWhite"}}
+        type = "submit"
+        disabled={this.state.loading}
+        onClick={(e) => this.submitForm(e)}>Capture</Button>
       </div>
     </FormGroup>
   </Form>
   {!this.state.loading ? null : 
-    <Loading className="row"/>
+    <Loading className="row justify-content-center"/>
   }
   {!this.state.fetchError ? null : 
     <div className= "messages">There is a Inconvenience... Try Again</div>
