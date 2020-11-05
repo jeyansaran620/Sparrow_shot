@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Button, Form, FormGroup, Label, Input,FormText,Card, CardImg, CardText, CardBody,
     CardTitle } from 'reactstrap';
-import Loading from './loading';
+import Loading from './Loading';
 
 class Forms extends React.Component{
     constructor(props) {

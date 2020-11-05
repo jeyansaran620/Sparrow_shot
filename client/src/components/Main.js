@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navbar, Nav} from 'reactstrap';
-import Jumbo from './jumbotron';
+import Jumbo from './Jumbotron';
 import Forms from './Form';
 import Footer from './Footer';
 
