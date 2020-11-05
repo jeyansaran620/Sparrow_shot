@@ -15,14 +15,14 @@
     Helps in keeping the code clean and right.
     Checkout the configuration on package.json
 
-## [Front-End:](https://github.com/jeyansaran620/Sparrow_shot/tree/main/client):
+## [Front-End](https://github.com/jeyansaran620/Sparrow_shot/tree/main/client):
     Built using react supported with Reactstrap for its responsiveness.
     Added some animation to maintain the theme of Shot.
     Splitted into simple components of Navbar, Jumbotron, Form, Footer.
     The Form Class Component takes in charge of the Request and handles Errors.
     Once the The ScreenShot is ready, it is displayed with a Download Button.
 
-## [Back-End:](https://github.com/jeyansaran620/Sparrow_shot/tree/main/server):
+## [Back-End](https://github.com/jeyansaran620/Sparrow_shot/tree/main/server):
     Build using Express js to respond to the client.
     Node-Webshot package is used for making the screenshots.
     Once the screenshot is ready, server responds with its URL.
